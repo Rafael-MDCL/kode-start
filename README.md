@@ -1,337 +1,302 @@
-# Kode Start by Kobe
+# 🚀 Rick and Morty App
 
-Neste repositório se encontram os aplicativos desenvolvidos durante as aulas, outros projetos desenvolvidos ao longo do programa e, também, documentações
-
-## Links úteis
-- Dart Tour: https://dart.dev/guides/language/language-tour
-- Projects: https://github.com/kobeapps/kode-start/tree/main/projects
-
-## Dart
-Dart é uma linguagem de programação lançada primeiramente em 2011, sua aplicação inicial era substituir o JavaScript como linguagem principal de desenvolvimento Web. Hoje em dia seu principal uso é através do framework Flutter.
-
-É uma linguagem estaticamente tipada, isto é, após um tipo ser atribuído o mesmo não pode mais ser alterado. Sua estrutura é muito parecida com a do Java.
-
-## Hello World
-Uma ótima maneira de entender a estrutura básica de uma linguagem é conhecendo como fazer o mais básico e conhecido dos códigos, o "Hello World". Sua estrutura em dart é desta maneira:
-
-    void main() {
-     print('Olá, Mundo!');
-    }
-
-## Comentários
-    // Para adicionar um comentário basta escrevê-lo desta maneira.
-    
-    /*
-    Mas se tiver que falar muita coisa
-    Você pode escrever desta maneira
-    */
-    
-    /// E se quiser documentar uma função ou classe escreva assim.
-
-## Fortemente tipada:
-Dart é fortemente tipada, mas por sua vez não é necessário definir os tipos explicitamente, podendo se utilizar. Por exemplo ao atribuir a variável:
-
-    var value = 1;
-
-value é inferido como sendo um inteiro. Logo atribuir um valor de um tipo diferente na sequência, como um booleano, resultará em um erro.
-
-    var value = 1;
-    value = false; //Erro
-
-Se por alguma necessidade for necessário que o tipo seja dinâmico, existe um tipo especial que foge desta regra, o dynamic, que permite fazer essas atribuições. Porém perdem-se todos os benefícios de uma linguagem fortemente tipada e aumenta e muito a chance de alguma atribuição errada passar despercebida.
-
-    dynamic value = 1;
-    value = false;
-
-## Palavras-chave
-
-Se você quer que uma variável nunca seja alterada deve-se usar final ou const, em vez de usar var ou somente o tipo. Uma variável definida como final pode ter seu valor definido apenas uma vez, já uma variável const é uma constante de tempo de compilação. (Uma variável const é implicitamente final)
-
-Se a constante estiver em uma classe deve ser marcado como static const, assim a mesma variável será compartilhada por todas as instâncias da classe e também ser acessível sem instanciar a classe.
-
-    final name = 'Bob';
-    final String nickname = 'Bobby';
-
+<div align="center">
+  <img src="assets/images/Group 119.png" alt="Rick and Morty Logo" width="200"/>
   
-
-    class DetailsPage {
-     static const routeName = '/details';
-    }
-
-## Tipos de variáveis
-
-### Números:
-
-Dart possui int e double que são subtipos de num;
-
-    int a = 1;
-    double b = 0.1;
-    num c = a + b;
-
-### Booleanos:
-
-    bool a = true;
-    bool b = false;
-
-### Strings:
-
-Strings podem ser atribuidas com aspas simples ou duplas
-
-    String a = 'a';
-    String b = "b";
-
-A interpolação pode ser feita usando um cifrão
-
-    int number = 1;
-    String text = "$number";
-
-No caso de ser uma expressão é necessário adicionar chaves.
-
-    int number = 1;
-    String text = "${number.isEven}";
-
-### Listas:
-
-    var list = [1, 2, 3];
-    var list2 = [...list];
-    
-    var nav = [
-     'Home',
-     'Furniture',
-     'Plants',
-     if (promoActive) 'Outlet',
-     promoActive ? 'Sale' : 'Normal
-    ];
-
-### Mapas/Dicionários:
-
-    var nobleGases = {
-     2: 'helium',
-     10: 'neon',
-     18: 'argon',
-    };
-
-### Generics:
-
-Tipos como listas e mapas possuem possibilidade de utilizar generics para definir os tipos de seus valores internos.
-
-    List<dynamic> myList;
-    Map<dynamic, dynamic> myMap;
-    
-    List<int> myList;
-    Map<String, bool> myMap;
-
-## Propriedades privadas:
-
-Em Dart não existem palavras como public, protected, e private, para definir uma variável, função ou classe como privada e que só possa ser acessada dentro de determinado contexto basta que seu nome comece com um underline (_);
-
-    class _Class {}
-    var _variable;
-    void _function(){}
-
-## Controle de fluxo e repetição
-
-    if (year >= 2001) {
-     print('21st century');
-    } else if (year >= 1901) {
-     print('20th century');
-    }
-    
-    final maior = a > b ? a : b;
-    
-    switch (expression) {
-     case value1:
-     // Code to execute if expression matches value1
-     break;
-     case value2:
-     // Code to execute if expression matches value2
-     break;
-     // ... more cases
-     default:
-     // Code to execute if no case matches
-     break;
-    }
-
-    for (final object in flybyObjects) {
-     print(object);
-    }
-
-    for (int month = 1; month <= 12; month++) {
-     print(month);
-    }
-
-    while (year < 2016) {
-     year += 1;
-    }
-
+  **Uma aplicação Flutter moderna para explorar o universo de Rick and Morty**
   
-
-## Null safety:
-
-Dart recentemente recebeu suporte a null safety, isso significa que é possível definir quais variáveis podem ou não receber null. O que tornou o seu analisador muito mais eficiente não permitindo que uma variável seja utilizada antes de ser definida.
-
-    void main() {
-     int value;
-     value = 0;
-     print(value);
-    }
-
-Dependendo do contexto de declaração de uma variável é necessário utilizar a palavra-chave late. Isto só é necessário em casos que o próprio Dart não consegue detectar previamente que uma variável será definida antes de ser executada.
-
-    late int value;
-
-    void main() {    
-     value = 0;    
-     print(value);    
-    }
-
-E quando esta variável pode ser nula, mas quando iremos utilizá-la, a mesma já terá seu valor definido, podemos usar uma exclamação.
-
-    int? value;
-        
-    void main() {    
-     value = 0;    
-     print(value!.toDouble());    
-    }
-
-E se quisermos que uma variável seja nula? Basta Adicionar uma interrogação junto ao tipo.
-
-    String? value;
-
-Além do null safety, o Dart também possui operadores null-aware.
-
-    main() async {
-     String? value;
-     String? trimmedValue = value?.trim();
-     String secondValue = value ?? '';
-    }
-
+  Desenvolvido para a **KOBE** no programa **KODE START**
   
+  [![Flutter](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev)
+  [![Dart](https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white)](https://dart.dev)
+  [![API](https://img.shields.io/badge/Rick%20and%20Morty-API-97ce4c?style=for-the-badge)](https://rickandmortyapi.com)
+</div>
 
-## Parâmetros:
+---
 
-Dart dá suporte a parâmetros obrigatórios, opcionais, nomeados e posicionais.
+## 📱 Sobre o Projeto
 
-    void enableFlags({required bool bold, bool? hidden}) {...}
-    void enableFlags({required bool bold, bool hidden = false}) {...}
-    enableFlags(bold: true, hidden: false);
+Este projeto é uma aplicação mobile desenvolvida em **Flutter** que consome a [Rick and Morty API](https://rickandmortyapi.com) para exibir informações sobre personagens da série. A aplicação foi criada como parte do programa **KODE START** da **KOBE**, focando em boas práticas de desenvolvimento, arquitetura limpa e uma experiência de usuário excepcional.
 
-    String say(String from, String msg, [String? device]) {
-     var result = '$from says $msg';
-     if (device != null) {
-     result = '$result with a $device';
-     }
-     return result;
-    }
-    
-    assert(say('Bob', 'Howdy') == 'Bob says Howdy');
-    assert(say('Bob', 'Howdy', 'smoke signal') == 'Bob says Howdy with a smoke signal');
+### 🎯 Objetivos do Projeto
 
-## Funções:
+- ✅ Implementar arquitetura limpa e escalável
+- ✅ Consumir API REST de forma eficiente
+- ✅ Criar interface fiel aos designs fornecidos
+- ✅ Aplicar boas práticas de desenvolvimento Flutter
+- ✅ Implementar funcionalidades modernas (busca, paginação infinita)
 
-Dart possui suporte a funções nomeadas e anônimas, arrow functions, inclusive declaração como variáveis com tipagem de retorno e de parâmetros.
+---
 
-    int sum(int a, int b) {return a + b;}
-    int sum2(int a, int b) => a + b;
-    int Function (int, int) sum3;
-    sum3 = (int a, int b) => a + b;
+## ✨ Funcionalidades
 
+### 🏠 **Tela Principal**
+- **Lista de Personagens**: Visualização em cards com imagem e nome
+- **Paginação Infinita**: Carregamento automático de mais personagens ao rolar
+- **Busca em Tempo Real**: Encontre personagens por nome com debounce otimizado
+- **Estados de Loading**: Indicadores visuais durante carregamento
+
+### 🔍 **Sistema de Busca**
+- **Busca Dinâmica**: Resultados atualizados conforme você digita
+- **Debounce Inteligente**: Otimização de performance (500ms)
+- **Paginação na Busca**: Scroll infinito também funciona nos resultados
+- **Estado Vazio**: Mensagens amigáveis quando não há resultados
+
+### 📱 **Tela de Detalhes**
+- **Informações Completas**: Status, espécie, gênero, origem e localização
+- **Primeira Aparição**: Nome do primeiro episódio onde o personagem aparece
+- **Status Visual**: Indicadores coloridos (🟢 Vivo, 🔴 Morto, 🟠 Desconhecido)
+- **Design Unificado**: Card único com imagem, nome e informações
+
+---
+
+## 🎬 Demonstração
+
+<div align="center">
   
+### 📱 App em Funcionamento
 
-    const list = ['apples', 'bananas', 'oranges'];
-    list.forEach((item) {
-     print('${list.indexOf(item)}: $item');
-    });
+![Demo do App Rick and Morty](rick_morty_project/rick_morty/assets/images/demo.gif)
 
+*Demonstração das principais funcionalidades: navegação, busca e detalhes dos personagens*
+
+</div>
+
+---
+
+## 🏗️ Arquitetura
+
+O projeto segue princípios de **Clean Architecture** com separação clara de responsabilidades:
+
+```
+lib/
+├── main.dart                 # Ponto de entrada da aplicação
+├── models/                   # Modelos de dados da API
+│   ├── characters_info.dart  # Modelo Character
+│   ├── episode_info.dart     # Modelo Episode
+│   └── location_info.dart    # Modelo Location
+├── dtos/                     # Data Transfer Objects
+│   └── characters_main_info.dart
+├── repositories/             # Camada de dados/API
+│   └── characters_repository.dart
+├── screens/                  # Telas da aplicação
+│   └── character_detail_screen.dart
+├── widgets/                  # Componentes reutilizáveis
+│   ├── characters_card.dart
+│   ├── app_bar_widget.dart
+│   └── search_bar_widget.dart
+└── themes/                   # Cores e estilos
+    └── app_colors.dart
+```
+
+### 🔧 **Padrões Utilizados**
+
+- **Repository Pattern**: Abstração da camada de dados
+- **Singleton Pattern**: Instância única do repository
+- **Factory Pattern**: Criação de objetos a partir de JSON
+- **DTO Pattern**: Simplificação de dados para as telas
+
+---
+
+## 🛠️ Tecnologias
+
+### **Core**
+- **Flutter**: Framework de desenvolvimento mobile
+- **Dart**: Linguagem de programação
+- **Material Design**: Sistema de design do Google
+
+### **Networking**
+- **Dio**: Cliente HTTP robusto com interceptors
+- **Rick and Morty REST API**: Fonte de dados oficial
+
+### **Arquitetura**
+- **StatefulWidget**: Gerenciamento de estado local
+- **Repository Pattern**: Abstração da camada de dados
+- **Clean Architecture**: Separação de responsabilidades
+
+---
+
+## 🚀 Como Executar
+
+### **Pré-requisitos**
+- Flutter SDK (>=3.8.1)
+- Dart SDK
+- Android Studio ou VS Code
+- Emulador Android/iOS ou dispositivo físico
+
+### **Instalação**
+
+1. **Clone o repositório**
+   ```bash
+   git clone [URL_DO_REPOSITORIO]
+   cd rick_morty
+   ```
+
+2. **Instale as dependências**
+   ```bash
+   flutter pub get
+   ```
+
+3. **Execute a aplicação**
+   ```bash
+   flutter run
+   ```
+
+### **Build para Produção**
+```bash
+# Android
+flutter build apk --release
+
+# iOS
+flutter build ios --release
+```
+
+---
+
+## 📦 Dependências
+
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  dio: ^5.4.3              # Cliente HTTP
+  cupertino_icons: ^1.0.8  # Ícones iOS
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0    # Análise de código
+```
+
+---
+
+## 🎨 Design System
+
+### **Cores**
+```dart
+// Cores principais
+primary: #1C1B1F      // Header e AppBar
+accent: #23232A       // Cards secundários
+background: #000000   // Fundo da aplicação
+cards: #87A1FA        // Cards e elementos destacados
+text: #FFFFFF         // Texto principal
+
+// Status dos personagens
+statusAlive: Green    // Personagem vivo
+statusDead: Red       // Personagem morto
+statusUnknown: Orange // Status desconhecido
+```
+
+### **Tipografia**
+- **Fonte**: Lato (todas as variações)
+- **Tamanhos**: 16px (corpo), 18px (títulos)
+
+---
+
+## 🔗 API Reference
+
+### **Endpoints Utilizados**
+
+```http
+GET https://rickandmortyapi.com/api/character
+GET https://rickandmortyapi.com/api/character?page={page}
+GET https://rickandmortyapi.com/api/character?name={query}&page={page}
+GET https://rickandmortyapi.com/api/episode/{id}
+```
+
+### **Exemplo de Response**
+```json
+{
+  "info": {
+    "count": 826,
+    "pages": 42,
+    "next": "https://rickandmortyapi.com/api/character?page=2",
+    "prev": null
+  },
+  "results": [
+    {
+      "id": 1,
+      "name": "Rick Sanchez",
+      "status": "Alive",
+      "species": "Human",
+      "gender": "Male",
+      "origin": {
+        "name": "Earth (C-137)"
+      },
+      "location": {
+        "name": "Citadel of Ricks"
+      },
+      "image": "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
+      "episode": ["https://rickandmortyapi.com/api/episode/1"]
+    }
+  ]
+}
+```
+
+---
+
+## 📱 Screenshots
+
+### Tela Principal
+- Lista de personagens com paginação infinita
+- Barra de busca integrada
+- Cards com design moderno
+
+### Tela de Detalhes
+- Informações completas do personagem
+- Status visual com indicadores coloridos
+- Design unificado conforme mockups
+
+### Sistema de Busca
+- Busca em tempo real
+- Estados de loading e vazio
+- Paginação nos resultados
+
+---
+
+## 🏢 Sobre a KOBE
+
+Este projeto foi desenvolvido como parte do programa **KODE START** da **KOBE**, uma iniciativa focada no desenvolvimento de talentos em tecnologia através de projetos práticos e mentoria especializada.
+
+### **KODE START**
+O programa KODE START oferece:
+- 📚 Formação prática em desenvolvimento mobile
+- 👥 Mentoria de profissionais experientes
+- 🚀 Projetos reais com tecnologias modernas
+- 🎯 Foco em boas práticas e arquitetura
+
+---
+
+## 👨‍💻 Desenvolvimento
+
+### **Funcionalidades Implementadas**
+- [x] Lista de personagens com paginação
+- [x] Tela de detalhes completa
+- [x] Sistema de busca em tempo real
+- [x] Estados de loading e erro
+- [x] Design responsivo e moderno
+- [x] Arquitetura limpa e escalável
+
+### **Boas Práticas Aplicadas**
+- ✅ Clean Architecture
+- ✅ Repository Pattern
+- ✅ Type Safety completo
+- ✅ Error Handling robusto
+- ✅ Performance otimizada
+- ✅ Código limpo e documentado
+
+---
+
+## 📄 Licença
+
+Este projeto foi desenvolvido para fins educacionais como parte do programa KODE START da KOBE.
+
+---
+
+<div align="center">
   
-
-## Classes:
-
-Possui classes abstratas, uso de implements e extends, além de enums e extensions.
-
-    import 'dart:math';
-
-    class Point {
-     static const double xOrigin = 0;
-     static const double yOrigin = 0;
-     double x;
-     double y;
-     Point(this.x, this.y);
-    
-     // Named constructor
-    
-     Point.origin()
-     : x = xOrigin,
-     y = yOrigin;
-     double distanceToOrigin() {
-     return sqrt(x * x + y * y);
-     }
-    }
-    
-      
-    
-    class Point3d extends Point {
-     static const double zOrigin = 0;
-     double z;
-     Point3d(double x, double y, this.z) : super(x, y);
-     
-     // Named constructor
-     Point3d.origin(): z = zOrigin, super.origin();
-
-     @override
-     double distanceToOrigin() {
-     return sqrt(x * x + y * y + z * z);
-     }
-    }
-
-    main() {
-     var a = Point(1, 2);
-     var b = Point.origin();
-     var c = Point(Point.xOrigin, 2);
-     print(a.distanceToOrigin());
-    }
-
+  **Desenvolvido com ❤️ para a KOBE**
   
-
-## Enum:
-
-    enum SelectedColor {
-     primaryColor,
-     secondaryColor,
-    }
-    
-    extension SelectedColorExtension on SelectedColor {
-     String get name => describeEnum(this);
-     String get displayTitle {
-     switch (this) {
-     case SelectedColor.PrimaryColor:
-     return 'This is the Primary Color';
-     case SelectedColor.SecondaryColor:
-     return 'This is the Secondary Color';
-     default:
-     return 'SelectedScheme Title is null';
-     }
-     }
-    }
-
-## Async e Await
-
-Utilização para tarefas que devem ser feitas de forma assíncrona.
-
-    main() async {
-     try {
-     var value = await Future.delayed(Duration(seconds: 1));
-     print(value.a);
-     } catch (e) {
-     print(e);
-     }
-    }
-
-    main() {
-    Future.delayed(Duration(seconds: 1))
-     .then(
-     (value) => print(value.a),
-     )
-     .catchError((error)=>print(error));
-    }
-
+  Programa KODE START | 2025
+  
+</div>
