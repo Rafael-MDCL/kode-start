@@ -59,4 +59,26 @@ class CharactersRepository {
       return '';
     }
   }
+
+  // Busca personagens por nome
+  Future<CharactersResult> searchCharacters(String query, {int page = 1}) async {
+    try {
+      final response = await _dio.get(
+        '/character',
+        queryParameters: {
+          'name': query,
+          'page': page,
+        },
+      );
+      
+      final List<dynamic> results = response.data['results'];
+      final characters = results.map((json) => Character.fromJson(json)).toList();
+      final hasNext = response.data['info']['next'] != null;
+      
+      return CharactersResult(characters: characters, hasNext: hasNext);
+    } catch (e) {
+      // Se não encontrar resultados, retorna lista vazia
+      return CharactersResult(characters: [], hasNext: false);
+    }
+  }
 }
