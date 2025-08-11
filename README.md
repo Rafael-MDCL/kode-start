@@ -50,6 +50,20 @@ Este projeto é uma aplicação mobile desenvolvida em **Flutter** que consome a
 
 ---
 
+## 🎬 Demonstração
+
+<div align="center">
+  
+### 📱 App em Funcionamento
+
+![Demo do App Rick and Morty](rick_morty_project/rick_morty/assets/images/demo.gif)
+
+*Demonstração das principais funcionalidades: navegação, busca e detalhes dos personagens*
+
+</div>
+
+---
+
 ## 🏗️ Arquitetura
 
 O projeto segue princípios de **Clean Architecture** com separação clara de responsabilidades:
