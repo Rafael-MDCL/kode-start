@@ -1,3 +1,5 @@
+import '../models/characters_info.dart';
+
 class CharacterMainInfo {
   final String name;
   final String image;
@@ -18,4 +20,21 @@ class CharacterMainInfo {
     required this.lastLocation,
     required this.firstEpisode,
   });
+
+  // Factory para criar a partir de Character e nome do primeiro episódio
+  factory CharacterMainInfo.fromCharacter(
+    Character character, 
+    String firstEpisodeName,
+  ) {
+    return CharacterMainInfo(
+      name: character.name,
+      image: character.image,
+      species: character.species,
+      gender: character.gender,
+      status: character.status,
+      origin: character.origin.name,
+      lastLocation: character.lastLocation.name,
+      firstEpisode: firstEpisodeName,
+    );
+  }
 }

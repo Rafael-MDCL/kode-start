@@ -7,7 +7,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xFF1C1B1F),
+      color: AppColors.primary,
       child: SafeArea(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -15,7 +15,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(left: 16.6, top: 19),
-              child: Icon(Icons.menu, size: 20.97, color: Colors.white),
+              child: Icon(Icons.menu, size: 20.97, color: AppColors.iconColor),
             ),
             Column(
               children: [
@@ -36,7 +36,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
               child: Icon(
                 Icons.account_circle_rounded,
                 size: 26.21,
-                color: Colors.white,
+                color: AppColors.iconColor,
               ),
             ),
           ],
